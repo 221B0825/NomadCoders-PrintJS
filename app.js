@@ -2,6 +2,8 @@ const canvas = document.querySelector('canvas');
 
 //context
 const ctx = canvas.getContext('2d');
-//context
-//context
-//context
+
+canvas.width = 800;
+canvas.height = 800;
+
+ctx.fillRect(50, 50, 100, 200);
