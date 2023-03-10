@@ -107,7 +107,13 @@ function onDoubleClick(event) {
     ctx.restore();
   }
 }
-function onSaveClick() {}
+function onSaveClick() {
+  const url = canvas.toDataURL();
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'myDrawing.png';
+  a.click();
+}
 
 //copy a single line: Shift + Alt + Direction Key
 //delete line: Ctrl + Shift + K
@@ -126,4 +132,4 @@ modeBtn.addEventListener('click', onModeClick);
 destroyBtn.addEventListener('click', onDestroyClick);
 eraserBtn.addEventListener('click', onEraserClick);
 file.addEventListener('change', onFileChange);
-saveBtn.addEventListener('save', onSaveClick);
+saveBtn.addEventListener('click', onSaveClick);
