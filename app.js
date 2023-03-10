@@ -2,6 +2,8 @@ const modeBtn = document.getElementById('mode-btn');
 const destroyBtn = document.getElementById('destroy-btn');
 const eraserBtn = document.getElementById('eraser-btn');
 const file = document.getElementById('file');
+const textInput = document.getElementById('text');
+const saveBtn = document.getElementById('save');
 
 const lineWidth = document.getElementById('line-width');
 const color = document.getElementById('color');
@@ -18,6 +20,7 @@ const CANVAS_HEIGHT = 800;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = 'round';
 
 let isPainting = false;
 let isFilling = false;
@@ -93,8 +96,22 @@ function onFileChange(event) {
   };
 }
 
+function onDoubleClick(event) {
+  //"save" function saves current style, color, status ... everthing of context.
+  const text = textInput.value;
+  if (text !== '') {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.font = '68px serif';
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
+function onSaveClick() {}
+
 //copy a single line: Shift + Alt + Direction Key
 //delete line: Ctrl + Shift + K
+canvas.addEventListener('dblclick', onDoubleClick);
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('click', onCanvasClick);
 canvas.addEventListener('mousedown', startPainting);
@@ -109,3 +126,4 @@ modeBtn.addEventListener('click', onModeClick);
 destroyBtn.addEventListener('click', onDestroyClick);
 eraserBtn.addEventListener('click', onEraserClick);
 file.addEventListener('change', onFileChange);
+saveBtn.addEventListener('save', onSaveClick);
